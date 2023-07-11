@@ -1,8 +1,13 @@
 const Owner = require("../models/owner");
+const Shop = require("../models/shop");
 
 const getAllOwner = async (ctx) => {
   try {
-    const owners = await Owner.findAll();
+    const owners = await Owner.findAll({ include: Shop });
+    // // Owner
+    // const owners = await Owner.findAll({
+    //   include: { model: Shop, required: false },
+    // });
     if (owners.length > 0) {
       ctx.status = 200;
       ctx.body = owners;

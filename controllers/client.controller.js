@@ -1,8 +1,10 @@
 const Client = require("../models/client");
+const Order = require("../models/order");
+const Tool = require("../models/tool");
 
 const getAllClients = async (ctx) => {
   try {
-    const clients = await Client.findAll();
+    const clients = await Client.findAll({ include: Order });
     if (clients.length > 0) {
       ctx.status = 200;
       ctx.body = clients;

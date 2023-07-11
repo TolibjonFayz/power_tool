@@ -27,7 +27,7 @@ const Owner = sequelize.define(
   }
 );
 
-// Shop.belongsTo(Owner);
+Shop.belongsTo(Owner);
 Owner.hasMany(Shop);
 
 module.exports = Owner;

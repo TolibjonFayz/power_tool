@@ -1,8 +1,12 @@
+const Client = require("../models/client");
 const Order = require("../models/order");
+const Shop_Tool = require("../models/shop_tool");
 
 const getAllOrder = async (ctx) => {
   try {
-    const orders = await Order.findAll();
+    const orders = await Order.findAll({
+      include: [{ model: Client }, { model: Shop_Tool }],
+    });
     if (orders.length > 0) {
       ctx.status = 200;
       ctx.body = orders;
@@ -19,18 +23,19 @@ const getAllOrder = async (ctx) => {
 
 const addOrder = async (ctx) => {
   try {
-    const { client_id, rent_tool_id, order_date, period, total_price } =
+    const { order_date, period, total_price, clientId, shopToolId } =
       ctx.request.body;
     const newOrder = await Order.create({
-      client_id,
-      rent_tool_id,
       order_date,
       period,
       total_price,
+      clientId,
+      shopToolId,
     });
     ctx.status = 200;
     ctx.body = newOrder;
   } catch (error) {
+    console.log(error);
     ctx.status = 500;
     ctx.body = "Error is detected";
   }

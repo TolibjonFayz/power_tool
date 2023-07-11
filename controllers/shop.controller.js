@@ -1,8 +1,9 @@
+const Owner = require("../models/owner");
 const Shop = require("../models/shop");
 
 const getAllShop = async (ctx) => {
   try {
-    const shops = await Shop.findAll();
+    const shops = await Shop.findAll({ include: Owner });
     if (shops.length > 0) {
       ctx.status = 200;
       ctx.body = shops;

@@ -10,12 +10,6 @@ const Order = sequelize.define(
       primaryKey: true,
       autoIncrement: true,
     },
-    client_id: {
-      type: DataTypes.INTEGER,
-    },
-    rent_tool_id: {
-      type: DataTypes.INTEGER,
-    },
     order_date: {
       type: DataTypes.DATE,
     },
