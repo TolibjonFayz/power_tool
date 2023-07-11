@@ -1,6 +1,8 @@
 const sequelize = require("../config/db");
 
 const { DataTypes } = require("sequelize");
+const Shop = require("./shop");
+const Tool = require("./tool");
 
 const Shop_Tool = sequelize.define(
   "shop_tool",
@@ -17,10 +19,10 @@ const Shop_Tool = sequelize.define(
       type: DataTypes.INTEGER,
     },
     rent_price: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DECIMAL(15, 2),
     },
     tool_price: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DECIMAL(15, 2),
     },
   },
   {
@@ -28,5 +30,7 @@ const Shop_Tool = sequelize.define(
     timestamps: false,
   }
 );
+
+Shop.belongsToMany(Tool, { through: Shop_Tool });
 
 module.exports = Shop_Tool;
